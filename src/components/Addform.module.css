@@ -1,0 +1,34 @@
+.Addform{
+    display: flex;
+    flex-direction: column;
+}
+.Addform div{
+    font-weight: bold;
+    margin: 3px;
+    display: flex;
+    flex-direction: column;
+}
+div label{
+    margin: 6px;
+    text-align:left;
+}
+div input{
+    border-radius: 16px;
+    font-size: larger;
+    padding: 3px 10px 3px 10px;
+    border: 2px solid rgb(182, 182, 182);
+}
+
+.OpeningText textarea{
+    height: 7rem;
+    border-radius: 16px;
+    font-size: larger;
+    padding: 3px 10px 3px 10px;
+    border: 2px solid rgb(182, 182, 182);
+
+}
+
+.Addform button{
+ margin: 1.5rem auto;
+ width: 30%;
+}

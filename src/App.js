@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import MoviesList from "./components/MoviesList";
 import "./App.css";
+import AddForm from "./components/AddForm";
 
 function App() {
   const [Movies, SetMovies] = useState([]);
@@ -8,9 +9,7 @@ function App() {
   const [error, Seterror] = useState(null);
   const [retry, setRetry] = useState(false);
 
-
-  const MovieHandler= useCallback( async() =>{
-    console.log("inside MovieHandler")
+  const MovieHandler = useCallback(async () => {
     setLoading(true);
     Seterror(null);
     try {
@@ -34,15 +33,14 @@ function App() {
       setRetry(true);
     }
     setLoading(false);
-  },[])
+  }, []);
 
   useEffect(() => {
-    console.log("run1")
-    MovieHandler()  
-  },[MovieHandler])
+    MovieHandler();
+  },[MovieHandler]);
 
   useEffect(() => {
-    console.log("run2")
+
     if (retry) {
       const intervalId = setInterval(async () => {
         await MovieHandler();
@@ -50,15 +48,18 @@ function App() {
       }, 5000);
       return () => clearInterval(intervalId);
     }
-  }, [retry]);
+  },[retry]);
 
   function RetryCalcelBtn() {
     setRetry(false);
-    Seterror("Try After SomeTime")
+    Seterror("Try After SomeTime");
   }
 
   return (
     <React.Fragment>
+      <section>
+        <AddForm/>
+      </section>
       <section>
         <button onClick={MovieHandler}>Fetch Movies</button>
       </section>
