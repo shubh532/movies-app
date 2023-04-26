@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import MoviesList from "./components/MoviesList";
 import "./App.css";
 
@@ -8,11 +8,13 @@ function App() {
   const [error, Seterror] = useState(null);
   const [retry, setRetry] = useState(false);
 
-  async function MovieHandler() {
+
+  const MovieHandler= useCallback( async() =>{
+    console.log("inside MovieHandler")
     setLoading(true);
     Seterror(null);
     try {
-      const Response = await fetch("https://swapi.dev/api/film/");
+      const Response = await fetch("https://swapi.dev/api/films/");
       if (!Response.ok) {
         throw new Error("Something Went Wrong...");
       }
@@ -32,9 +34,15 @@ function App() {
       setRetry(true);
     }
     setLoading(false);
-  }
+  },[])
 
   useEffect(() => {
+    console.log("run1")
+    MovieHandler()  
+  },[MovieHandler])
+
+  useEffect(() => {
+    console.log("run2")
     if (retry) {
       const intervalId = setInterval(async () => {
         await MovieHandler();
