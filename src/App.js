@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-
 import MoviesList from './components/MoviesList';
 import './App.css';
 
+
 function App() {
   const [Movies,SetMovies]=useState([])
+  const [Loading,setLoading]=useState(false)
 
 
   async function MovieHandler(){
+    setLoading(true)
     const Response= await fetch("https://swapi.dev/api/films/")
     const Data=await Response.json()
 
@@ -19,8 +21,8 @@ function App() {
       releaseDate:data.release_date
     }
     })
-    
     SetMovies(transformData)
+    setLoading(false)
   }
 
   return (
@@ -29,7 +31,7 @@ function App() {
         <button onClick={MovieHandler}>Fetch Movies</button>
       </section>
       <section>
-        <MoviesList movies={Movies} />
+        <MoviesList movies={Movies} Loading={Loading} />
       </section>
     </React.Fragment>
   );
