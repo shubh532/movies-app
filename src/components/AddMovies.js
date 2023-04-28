@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Style from "./Addform.module.css";
+import Style from "./AddMovies.module.css";
 
-function AddForm() {
+function AddMovies(props) {
     const [title, settitle]= useState("")
     const [Optext, setOpText]= useState("")
     const [Date, setDate]= useState("")
@@ -18,13 +18,13 @@ function AddForm() {
 
     function addBtnhandler(e){
         e.preventDefault()
-       const Data={
+       const Movie={
         title:title,
         Optext:Optext,
         Date:Date
         }
 
-        console.log(Data)
+        props.AddMoviesHandler(Movie)
     }
 
 
@@ -48,4 +48,4 @@ function AddForm() {
 }
 <label></label>;
 
-export default AddForm;
+export default AddMovies;
